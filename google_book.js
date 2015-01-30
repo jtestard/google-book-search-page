@@ -9,8 +9,7 @@ function Books(){
 
 // create an ajax call to hit the google books api
 // when the results are received from the api, the json data returned is rendered to the DOM
-//in this case i only returned the first result from the search just to keep the results look cleaner
-// however if I were to refactor this code, I would create multiple match results
+// I also only returned the first 3 results since usually the API returned numerous results
 
 Books.prototype.getBooks = function(params){
 	console.log('ajax call happening')
@@ -20,13 +19,15 @@ Books.prototype.getBooks = function(params){
 		dataType: 'json',
 		success: function (data, textStatus, xhr) {
 
-       
+       for (var i = 0; i < 3; i++){
 
-       $('.search_results').append('<li> Title: ' + data.items[0].volumeInfo.title + '</li>')
-       $('.search_results').append('<li> Author: ' + data.items[0].volumeInfo.authors + '</li>')
-       $('.search_results').append('<li> Description: ' + data.items[0].volumeInfo.subtitle + '</li>')
-       $('.search_results').append('<li> Page Count: ' + data.items[0].volumeInfo.pageCount + '</li>')
-       $('.search_results').append('<img src=' + data.items[0].volumeInfo.imageLinks.thumbnail + '>')
+
+       $('.search_results').append('<li> Title: ' + data.items[i].volumeInfo.title + '</li>')
+       $('.search_results').append('<li> Author: ' + data.items[i].volumeInfo.authors + '</li>')
+       $('.search_results').append('<li> Description: ' + data.items[i].volumeInfo.subtitle + '</li>')
+       $('.search_results').append('<li> Page Count: ' + data.items[i].volumeInfo.pageCount + '</li>')
+       $('.search_results').append('<li><img src=' + data.items[i].volumeInfo.imageLinks.thumbnail + '></li><br><br>')
+       }
 
       },
 	})
