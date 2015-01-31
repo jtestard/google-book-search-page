@@ -49,7 +49,7 @@ View.prototype.getSearchParams = function(){
 }
 
 View.prototype.refreshPage = function(){
-	window.location.reload();
+	$('.search_results').children().remove()
 }
 
 
